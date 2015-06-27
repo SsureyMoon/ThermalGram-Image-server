@@ -45,7 +45,8 @@ gunicorn -b 0.0.0.0:8000 app:app --timeout 20
 ```
 
 ## Test
-Send post message
+Send post message in CMD
+or Visit ```http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/```
 ```bash
 curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=@/path/to/the/image/IMG_17.JPEG" http://127.0.0.1:8000/image/
 ```
@@ -54,4 +55,3 @@ or
 ```bash
 curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=@/path/to/the/image/IMG_17.JPEG" http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/
 ```
-curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=@/Users/ssureymoon/Documents/workspace/thermal/PILtest/core/reference/IMG_17.JPEG" http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/
