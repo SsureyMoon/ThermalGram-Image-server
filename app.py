@@ -31,7 +31,6 @@ def image():
         return response
 
     if request.method == 'POST':
-
         if request.form.get('_auth_token') != auth_token:
             response = make_response(
                 json.dumps("Token is not valid"), 401
@@ -39,18 +38,19 @@ def image():
             response.headers['Content-Type'] = 'application/json'
             return response
 
-        image_file = request.files['justimage']
+
+        image_file = request.files.get('justimage', None)
         if image_file and allowed_file(image_file.filename):
             filename = secure_filename(image_file.filename)
             image_file_path = os.path.join(IMAGE_FOLDER, filename)
             image_file.save(image_file_path)
-
-        temperature_file = request.files['temperature']
+        print 2
+        temperature_file = request.files.get('temperature', None)
         if temperature_file and allowed_file(temperature_file.filename):
             filename = secure_filename(temperature_file.filename)
             temperature_path = os.path.join(TRAIN_FOLDER, filename)
             image_file.save(temperature_path)
-
+        print 24
         rate = request.form.get('rate')
         if not rate:
             rate = 2.5
@@ -58,16 +58,17 @@ def image():
         upload_result = {
             "result": "success",
             "rate": int(rate),
-            "image_file": image_file.filename,
-            "temperature_file": temperature_file.filename,
+            "image_file": image_file.filename if image_file else None,
+            "temperature_file": temperature_file.filename if temperature_file else None,
             "result": None
         }
-        res = fr.face_recognizer(image_file_path, int(rate))
-        predicted_rate =lr.linear_regressor(res, int(rate))
-        upload_result['result'] = {"predicted_rate": predicted_rate}
+        if image_file or temperature_file:
+            res = fr.face_recognizer(image_file_path, int(rate))
+            predicted_rate =lr.linear_regressor(res, int(rate))
+            upload_result['result'] = {"predicted_rate": predicted_rate}
         return jsonify(upload_result)
 
 
-if __name__ == "__main__":
-    app.debug = True
-    app.run(host='0.0.0.0', port=8000)
+# if __name__ == "__main__":
+#     app.debug = True
+#     app.run(host='0.0.0.0', port=8000)
