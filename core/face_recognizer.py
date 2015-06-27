@@ -53,8 +53,6 @@ def face_recognizer(input_file, rate):
             # To make all faces have same size, we resize the face image as big as the original image size
             res = cv2.resize(orig_face_gray,(square, square), interpolation=cv2.INTER_CUBIC)
 
-            return res
-
-    return None
-
+            return True, res
+    return False, []
 

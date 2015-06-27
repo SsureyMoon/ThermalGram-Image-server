@@ -28,5 +28,5 @@ def linear_regressor(res, rate):
     predicted_rate = regr.predict(X)
     pkl_file = open(os.path.join(MODEL_FOLDER, "lr_model.pkl"), 'wb')
     pickle.dump(regr, pkl_file)
-
+    
     return float(predicted_rate[0])
