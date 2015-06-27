@@ -64,8 +64,12 @@ def image():
         }
         if image_file or temperature_file:
             res = fr.face_recognizer(image_file_path, int(rate))
-            predicted_rate =lr.linear_regressor(res, int(rate))
-            upload_result['result'] = {"predicted_rate": predicted_rate}
+            if not res:
+                upload_result['result'] = {"predicted_rate": "no face found"}
+            else:
+                predicted_rate =lr.linear_regressor(res, int(rate))
+                upload_result['result'] = {"predicted_rate": predicted_rate}
+
         return jsonify(upload_result)
 
 
