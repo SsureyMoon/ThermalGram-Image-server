@@ -38,19 +38,18 @@ def image():
             response.headers['Content-Type'] = 'application/json'
             return response
 
-
         image_file = request.files.get('justimage', None)
         if image_file and allowed_file(image_file.filename):
             filename = secure_filename(image_file.filename)
             image_file_path = os.path.join(IMAGE_FOLDER, filename)
             image_file.save(image_file_path)
-        print 2
+
         temperature_file = request.files.get('temperature', None)
         if temperature_file and allowed_file(temperature_file.filename):
             filename = secure_filename(temperature_file.filename)
             temperature_path = os.path.join(TRAIN_FOLDER, filename)
             image_file.save(temperature_path)
-        print 24
+
         rate = request.form.get('rate')
         if not rate:
             rate = 2.5

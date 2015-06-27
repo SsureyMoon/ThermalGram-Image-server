@@ -55,7 +55,6 @@ def face_recognizer(input_file, rate):
 
             return res
 
-        else:
-            return None
+    return None
 
 

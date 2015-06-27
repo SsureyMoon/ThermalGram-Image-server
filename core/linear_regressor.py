@@ -15,7 +15,7 @@ def linear_regressor(res, rate):
     X = np.reshape(res, -1)
 
     Y = np.array([int(rate)])
-    # cv2.waitKey(0)
+
     pkl_file = None
     if os.path.exists(os.path.join(MODEL_FOLDER, "lr_model.pkl")):
         pkl_file = open(os.path.join(MODEL_FOLDER, "lr_model.pkl"), 'rb')
