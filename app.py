@@ -101,8 +101,10 @@ def image():
                     "point1": '/pic/point1.'+ext,
                     "point2": '/pic/point2.'+ext
                 }
+                print upload_result
             else:
                 upload_result['result']['error'] = "Can not get image from link"
+                print "Error"
 
         return jsonify(upload_result)
 
