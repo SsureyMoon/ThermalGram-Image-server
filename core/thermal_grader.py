@@ -23,7 +23,6 @@ SCORE2_ZONE1 = (np.array([21, 50, 50],np.uint8), np.array([50, 255, 255],np.uint
 
 def thermal_grader(input_file):
     image = cv2.imread(input_file)
-    print image.shape[:2]
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     threshed_base1 = cv2.inRange(hsv, BASE_ZONE1[0], BASE_ZONE1[1])/255
     threshed_base2 = cv2.inRange(hsv, BASE_ZONE2[0], BASE_ZONE2[1])/255
@@ -34,7 +33,7 @@ def thermal_grader(input_file):
     total_base = sum(sum(threshed_base1)) + sum(sum(threshed_base2))
     total_hot = 0.75*sum(sum(threshed1_1)) + 0.75*sum(sum(threshed1_2)) + 1.25*sum(sum(threshed2_1))
 
-    hot = 7.5*(total_hot/total_base)
+    hot = 5.5*(total_hot/total_base)
     return_value = 5 if hot > 5 else hot
     return return_value
 

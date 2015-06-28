@@ -55,7 +55,6 @@ def face_recognizer(input_file, rate):
 
             # show original image
             print "file: {0}, scale: {1}, faces: {2}".format(input_file, scale, len(faces))
-            print "hit the space on the picture."
 
             # mark face by green rectangle
             (x, y, w, h) = faces[0]

@@ -14,7 +14,7 @@ app.config.from_object(__name__)
 auth_token = config.AUTH_TOKEN
 IMAGE_FOLDER = os.path.join(config.BASE_DIR, 'data/image')
 TRAIN_FOLDER = os.path.join(config.BASE_DIR, 'data/train')
-ALLOWED_EXTENSIONS = set(['jpeg', 'JPEG', 'jpg', 'png', 'bmp', 'bin', 'txt'])
+ALLOWED_EXTENSIONS = set(['jpeg', 'JPEG', 'jpg', 'JPG', 'png', 'PNG', 'bmp','BMP', 'bin', 'txt'])
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -41,7 +41,7 @@ def image():
             return response
 
         image_file_url = request.form.get('justimage', None)
-
+        image_file_path = None
         if image_file_url and allowed_file(image_file_url):
             h = httplib2.Http('.cache')
             response, content = h.request(image_file_url, "GET")
@@ -90,10 +90,11 @@ def image():
                    upload_result['result'] = {"how_other_user_say": "no face found"}
             except:
                 pass
-            if image_file_url:
+            if image_file_path:
                 thermal_rate = tg.thermal_grader(image_file_path)
                 upload_result['result']['thermal_rate'] = thermal_rate if thermal_rate else 2.5
-
+            else:
+                upload_result['result']['error'] = "Can not get image from link"
         return jsonify(upload_result)
 
 
