@@ -4,7 +4,10 @@
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	</head>
 	<body>
-        <form action="{{ url_for('image') }}" method="POST" enctype="multipart/form-data">
+        <script type="text/javascript">
+           var post_image_url = "{{ url_for('image') }}";
+        </script>
+        <form id="post-image" action="" method="POST" enctype="multipart/form-data">
             <div>
                 Auth Token <input type="text" id="auth-token" name="_auth_token" placeholder="auth token">
             </div><br>
@@ -21,6 +24,8 @@
                 <input type="submit">
             </div>
         </form>
+        <div id="images">
+        </div>
 	</body>
 		<script type="text/javascript"
 				src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

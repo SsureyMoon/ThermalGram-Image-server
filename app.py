@@ -1,7 +1,7 @@
 import os
 import json
 from flask import Flask, request, redirect,\
-    url_for, render_template, flash, jsonify, make_response
+    url_for, render_template, flash, jsonify, make_response, send_from_directory
 from werkzeug.utils import secure_filename
 from settings import config
 from core import face_recognizer as fr
@@ -46,8 +46,10 @@ def image():
             h = httplib2.Http('.cache')
             response, content = h.request(image_file_url, "GET")
 
+            ext = image_file_url.rsplit('.', 1)[1]
+
             if response.status == '200' or '304':
-                filename="image." + image_file_url.rsplit('.', 1)[1]
+                filename="image." + ext
                 # filename = secure_filename(image_file.filename)
                 image_file_path = os.path.join(IMAGE_FOLDER, filename)
                 with open(image_file_path, 'wb') as f:
@@ -91,12 +93,23 @@ def image():
             except:
                 pass
             if image_file_path:
-                thermal_rate = tg.thermal_grader(image_file_path)
+                thermal_rate = tg.thermal_grader(image_file_path, ext)
                 upload_result['result']['thermal_rate'] = thermal_rate if thermal_rate else 2.5
+                upload_result['result']['images'] = {
+                    "orig": '/pic/image.'+ext,
+                    "base": '/pic/base.'+ext,
+                    "point1": '/pic/point1.'+ext,
+                    "point2": '/pic/point2.'+ext
+                }
             else:
                 upload_result['result']['error'] = "Can not get image from link"
+
         return jsonify(upload_result)
 
+
+@app.route('/pic/<path:filename>')
+def send_pic(filename):
+    return send_from_directory(IMAGE_FOLDER, filename)
 
 if __name__ == "__main__":
     app.debug = True
