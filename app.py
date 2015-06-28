@@ -78,15 +78,15 @@ def image():
             "rate": rate,
             "image_file": image_file_url if image_file_url else None,
             "temperature_file": temp_file_url if temp_file_url else None,
-            "result": None
+            "result": dict()
         }
         if image_file_url or temp_file_url:
             result, res = fr.face_recognizer(image_file_path, int(rate))
             if result:
-                predicted_rate =lr.linear_regressor(res, int(rate))
-                upload_result['result'] = {"how_other_user_say": predicted_rate}
+               predicted_rate =lr.linear_regressor(res, int(rate))
+               upload_result['result'] = {"how_other_user_say": predicted_rate}
             else:
-                upload_result['result'] = {"how_other_user_say": "no face found"}
+               upload_result['result'] = {"how_other_user_say": "no face found"}
 
             if image_file_url:
                 thermal_rate = tg.thermal_grader(image_file_path)

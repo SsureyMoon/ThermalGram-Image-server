@@ -1,4 +1,4 @@
-from __future__ import  division
+from __future__ import division
 import os
 import cv2
 import numpy as np
@@ -14,8 +14,8 @@ MODEL_FOLDER = os.path.join(BASE_DIR, 'data/model')
 
 input_file = os.path.join(IMAGE_FOLDER, "IMG_17.JPEG")
 
-BASE_ZONE1= (np.array([0, 50, 50],np.uint8), np.array([120/2, 255, 255],np.uint8))
-BASE_ZONE2= (np.array([(-120+360)/2, 50, 50],np.uint8), np.array([360/2, 255, 255],np.uint8))
+BASE_ZONE1 = (np.array([0, 50, 50],np.uint8), np.array([120/2, 255, 255],np.uint8))
+BASE_ZONE2 = (np.array([(-120+360)/2, 50, 50],np.uint8), np.array([360/2, 255, 255],np.uint8))
 SCORE1_ZONE1 = (np.array([0, 50, 50],np.uint8), np.array([20, 255, 255],np.uint8))
 SCORE1_ZONE2 = (np.array([(-20 + 360)/2, 50, 50],np.uint8), np.array([360/2, 255, 255],np.uint8))
 SCORE2_ZONE1 = (np.array([21, 50, 50],np.uint8), np.array([50, 255, 255],np.uint8))
@@ -23,6 +23,7 @@ SCORE2_ZONE1 = (np.array([21, 50, 50],np.uint8), np.array([50, 255, 255],np.uint
 
 def thermal_grader(input_file):
     image = cv2.imread(input_file)
+    print image.shape[:2]
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     threshed_base1 = cv2.inRange(hsv, BASE_ZONE1[0], BASE_ZONE1[1])/255
     threshed_base2 = cv2.inRange(hsv, BASE_ZONE2[0], BASE_ZONE2[1])/255
@@ -38,4 +39,4 @@ def thermal_grader(input_file):
     return return_value
 
 if __name__ == "__main__":
-    thermal_grader()
+    print thermal_grader(input_file)
