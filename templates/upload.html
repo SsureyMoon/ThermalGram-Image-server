@@ -2,32 +2,47 @@
 <html lang="en">
 	<head>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <style>
+            #main {
+                margin: 40px 0px 10px 0px;
+            }
+        </style>
 	</head>
 	<body>
         <script type="text/javascript">
            var post_image_url = "{{ url_for('image') }}";
         </script>
-        <form id="post-image" action="" method="POST" enctype="multipart/form-data">
-            <div>
-                Auth Token <input type="text" id="auth-token" name="_auth_token" placeholder="auth token">
-            </div><br>
-            <div>
-                user rate (Int) <input type="text" id="user-rate" name="rate" placeholder="user rate">
-            </div><br>
-            <div>
-                Thermal Image file url: <input type="text" name="justimage" placeholder="url here">
-            </div><br>
-            <div>
-                Thermal Temperature file url: <input type="text" name="temperature" placeholder="url here">
-            </div><br>
-            <div>
-                <input type="submit">
+        <div class="container">
+            <div id="main">
+                <form id="post-image" action="" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                    <label for="auth-token">Auth Token</label>
+                        <input type="text" id="auth-token" name="_auth_token" placeholder="auth token">
+                    </div>
+                    <div class="form-group">
+                    <label for="user-rate">user rate (Int)</label>
+                         <input type="text" id="user-rate" name="rate" placeholder="user rate">
+                    </div>
+                    <div class="form-group">
+                    <label for="image-file-url">Thermal Image file(url)</label>
+                        <input type="text" id="image-file-url" name="justimage" placeholder="url here">
+                    </div>
+                    <div class="form-group">
+                    <label for="temp-file-url">Thermal Temperature file(url)</label>
+                        <input type="text" id="temp-file-url" name="temperature" placeholder="url here">
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Submit!</button>
+                </form>
             </div>
-        </form>
-        <div id="images">
+
+            <div id="images">
+            </div>
         </div>
 	</body>
 		<script type="text/javascript"
 				src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script src="{{ url_for('static', filename='upload.js') }}"></script>
 </html>
