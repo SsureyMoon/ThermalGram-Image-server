@@ -41,14 +41,14 @@ def image():
             return response
 
         image_file = request.form.get('justimage', None)
-        h = httplib2.Http('.cache')
-        response, content = h.request(image_file)
-        with open('image2.jpg', 'wb') as f:
-            f.write(content)
-        if image_file and allowed_file(image_file.filename):
 
+        if image_file and allowed_file(image_file.filename):
+            h = httplib2.Http('.cache')
+            response, content = h.request(image_file)
             filename = secure_filename(image_file.filename)
             image_file_path = os.path.join(IMAGE_FOLDER, filename)
+            with open(image_file_path, 'wb') as f:
+                f.write(content)
             image_file.save(image_file_path)
 
         temperature_file = request.form.get('temperature', None)
