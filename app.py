@@ -47,7 +47,7 @@ def image():
             response, content = h.request(image_file_url, "GET")
 
             if response.status == '200' or '304':
-                filename="image.jpg"
+                filename="image." + image_file_url.rsplit('.', 1)[1]
                 # filename = secure_filename(image_file.filename)
                 image_file_path = os.path.join(IMAGE_FOLDER, filename)
                 with open(image_file_path, 'wb') as f:
@@ -81,13 +81,15 @@ def image():
             "result": dict()
         }
         if image_file_url or temp_file_url:
-            result, res = fr.face_recognizer(image_file_path, int(rate))
-            if result:
-               predicted_rate =lr.linear_regressor(res, int(rate))
-               upload_result['result'] = {"how_other_user_say": predicted_rate}
-            else:
-               upload_result['result'] = {"how_other_user_say": "no face found"}
-
+            try:
+                result, res = fr.face_recognizer(image_file_path, int(rate))
+                if result:
+                   predicted_rate =lr.linear_regressor(res, int(rate))
+                   upload_result['result'] = {"how_other_user_say": predicted_rate}
+                else:
+                   upload_result['result'] = {"how_other_user_say": "no face found"}
+            except:
+                pass
             if image_file_url:
                 thermal_rate = tg.thermal_grader(image_file_path)
                 upload_result['result']['thermal_rate'] = thermal_rate if thermal_rate else 2.5
