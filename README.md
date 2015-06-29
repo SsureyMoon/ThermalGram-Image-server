@@ -45,15 +45,16 @@ gunicorn -b 0.0.0.0:8000 -w 5 app:app --timeout 20
 ```
 
 ## Test
-Send post message in CMD
-or Visit ```http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/```
-```bash
-curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=@/path/to/the/image/IMG_17.JPEG" http://127.0.0.1:8000/image/
-curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=http://thermalgram.com/julia.jpg" http://127.0.0.1:8000/image/
-```
-or
 
+Use ```_auth_token```, which you set.
+Send post message in CMD to local server.
 ```bash
-curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=@/path/to/the/image/IMG_17.JPEG" http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/
-curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=http://thermalgram.com/julia.jpg" http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/
+curl -X POST --form "_auth_token=<replace this>" --form "rate=4" --form "justimage=@/path/to/the/image/IMG_17.JPEG" http://127.0.0.1:8000/image/
+curl -X POST --form "_auth_token=<replace this>" --form "rate=4" --form "justimage=http://thermalgram.com/julia.jpg" http://127.0.0.1:8000/image/
 ```
+or post message in CMD to amazon server.
+```bash
+curl -X POST --form "_auth_token=<replace this>" --form "rate=4" --form "justimage=@/path/to/the/image/IMG_17.JPEG" http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/
+curl -X POST --form "_auth_token=<replace this>" --form "rate=4" --form "justimage=http://thermalgram.com/julia.jpg" http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/
+```
+or Visit ```http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/```
