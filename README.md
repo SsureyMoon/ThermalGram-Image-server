@@ -1,4 +1,7 @@
 # Python Thermal Image Processing Server
+Image processing server for ThermalGram(thermalgram.com).
+ThermalGram is an Android and web application which uses FLIR One camera to take and share thermal selfies with social media. This sever recognizes thermal temperature of the picture in the request, returns a response with the calculated temperature rating.
+
 
 ## Connect
 ```bash
