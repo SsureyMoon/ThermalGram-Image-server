@@ -1,4 +1,7 @@
 # Python Thermal Image Processing Server
+Image processing server for ThermalGram(thermalgram.com).
+ThermalGram is an Android and web application which uses FLIR One camera to take and share thermal selfies with social media. This sever recognizes thermal temperature of the picture in the request, returns a response with the calculated temperature rating.
+
 
 ## Connect
 ```bash
@@ -45,15 +48,16 @@ gunicorn -b 0.0.0.0:8000 -w 3 app:app --timeout 20 --log-file logs.log --log-lev
 ```
 
 ## Test
-Send post message in CMD
-or Visit ```http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/```
-```bash
-curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=@/path/to/the/image/IMG_17.JPEG" http://127.0.0.1:8000/image/
-curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=http://thermalgram.com/julia.jpg" http://127.0.0.1:8000/image/
-```
-or
 
+Use ```_auth_token```, which you set.
+Send post message in CMD to local server.
 ```bash
-curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=@/path/to/the/image/IMG_17.JPEG" http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/
-curl -X POST --form "_auth_token=ASDFQWER1234" --form "rate=4" --form "justimage=http://thermalgram.com/julia.jpg" http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/
+curl -X POST --form "_auth_token=<replace this>" --form "rate=4" --form "justimage=@/path/to/the/image/IMG_17.JPEG" http://127.0.0.1:8000/image/
+curl -X POST --form "_auth_token=<replace this>" --form "rate=4" --form "justimage=http://thermalgram.com/julia.jpg" http://127.0.0.1:8000/image/
 ```
+or post message in CMD to amazon server.
+```bash
+curl -X POST --form "_auth_token=<replace this>" --form "rate=4" --form "justimage=@/path/to/the/image/IMG_17.JPEG" http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/
+curl -X POST --form "_auth_token=<replace this>" --form "rate=4" --form "justimage=http://thermalgram.com/julia.jpg" http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/
+```
+or Visit ```http://ec2-52-5-124-92.compute-1.amazonaws.com:8000/image/```
