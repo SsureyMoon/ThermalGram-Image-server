@@ -2,6 +2,19 @@
 Image processing server for ThermalGram(thermalgram.com).
 ThermalGram is an Android and web application which uses FLIR One camera to take and share thermal selfies with social media. This sever recognizes thermal temperature of the picture in the request, returns a response with the calculated temperature rating.
 
+## Main dependencies
+### Software
+- [Python](https://www.python.org/) version 2.7.x or higher
+- [Flask](http://flask.pocoo.org/) version 0.10.x or higher
+- [Gunicorn](http://gunicorn.org/) 19.3.x or higher
+- [httplib2](https://pypi.python.org/pypi/httplib2) 0.8 or higher
+- [numpy](http://www.numpy.org/) 1.8.x or higher
+- [scipy](http://www.scipy.org/) 0.13.x or higher
+- [scikit-learn](http://scikit-learn.org/) 4.x or higher
+- [OpenCV](http://opencv.org/) 2.4.8 or higher
+
+### Hardware
+- [FLIRONE](http://flir.com/flirone/) Thermal accessory for Android Smartphone
 
 ## Connect
 ```bash
