@@ -41,7 +41,7 @@ pip install -r requirements.txt
 
 ## Run server
 ```bash
-gunicorn -b 0.0.0.0:8000 -w 5 app:app --timeout 20
+gunicorn -b 0.0.0.0:8000 -w 3 app:app --timeout 20 --log-file logs.log --log-level debug &
 ```
 
 ## Test
