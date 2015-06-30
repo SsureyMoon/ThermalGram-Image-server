@@ -8,20 +8,14 @@ $(function() {
           data: $(this).serialize(),
           success: function (result) {
               if (result) {
-                  console.log(result.result);
-                  var content =
-                  '<h3>' + "Result" + '</h3>' +
-                  '<p>' + JSON.stringify(result) + '</p><br>'+
-                  "<img src=http://localhost:8000"+result.result.images.orig+">"+
-                  "<img src=http://localhost:8000"+result.result.images.base+">"+
-                  "<img src=http://localhost:8000"+result.result.images.point1+">"+
-                  "<img src=http://localhost:8000"+result.result.images.point2+">"
-//                  var content = '<h3>' + "Result" + '</h3>' +
-//                  '<p>' + JSON.stringify(result) + '</p><br>'+
-//                  "<img src=http://ec2-52-5-124-92.compute-1.amazonaws.com:8000"+result.result.images.orig+">"+
-//                  "<img src=http://ec2-52-5-124-92.compute-1.amazonaws.com:8000"+result.result.images.base+">"+
-//                  "<img src=http://ec2-52-5-124-92.compute-1.amazonaws.com:8000"+result.result.images.point1+">"+
-//                  "<img src=http://ec2-52-5-124-92.compute-1.amazonaws.com:8000"+result.result.images.point2+">"
+                 var publicDNS = "http://ec2-54-208-206-110.compute-1.amazonaws.com";
+                 console.log(result.result);
+                 var content = '<h3>' + "Result" + '</h3>' +
+                 '<p>' + JSON.stringify(result) + '</p><br>'+
+                 "<img src="+publicDNS+result.result.images.orig+">"+
+                 "<img src="+publicDNS+result.result.images.base+">"+
+                 "<img src="+publicDNS+result.result.images.point1+">"+
+                 "<img src="+publicDNS+result.result.images.point2+">";
                   $('#images').html(content);
               }
           },
